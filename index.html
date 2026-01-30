@@ -59,6 +59,54 @@
             border-radius: 12px;
         }
 
+        /* Nuevos estilos para texto sobre la imagen */
+        .hero-text {
+            position: absolute;
+            left: calc(var(--cta-left) + var(--cta-width) + 1rem);
+            bottom: calc(var(--cta-bottom) + 0.5rem);
+            max-width: 45%;
+            color: #fff;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            margin: 0 0 .3rem 0;
+            font-size: clamp(1.25rem, 3.5vw, 3rem);
+            line-height: 1.05;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fff 0%, #ffd54a 40%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            display: inline-block;
+            animation: shine 3s linear infinite;
+            -webkit-text-stroke: 0.6px rgba(0,0,0,0.25);
+        }
+
+        .hero-text .subtitle {
+            margin: 0;
+            font-size: clamp(.9rem, 2.2vw, 1.2rem);
+            color: rgba(255,255,255,0.95);
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        @keyframes shine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .hero-text::before {
+            content: "";
+            position: absolute;
+            inset: -0.5rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.35));
+            z-index: -1;
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
 @media (max-width: 900px) { 
 img { 
    max-width: 100%;
@@ -89,8 +137,17 @@ td, th {
         --cta-height: 9vw;
     }
 
-}	
+    .hero-text {
+        left: 6%;
+        right: 6%;
+        bottom: calc(var(--cta-bottom) + var(--cta-height) + 2vw);
+        max-width: none;
+    }
 
+    .hero-text h1 { font-size: clamp(1rem, 6.5vw, 2.2rem); }
+    .hero-text .subtitle { font-size: clamp(.85rem, 4.5vw, 1rem); }
+
+}	
 
     </style>
 </head>
@@ -102,6 +159,12 @@ td, th {
         <span class="sr-only">Contactar por WhatsApp</span>
         <!-- estructura vacía visualmente, pero accesible y focalizable -->
     </a>
+
+    <!-- Nuevo: texto sobre la imagen -->
+    <div class="hero-text" role="region" aria-label="Título y subtítulo">
+        <h1>Tu título aquí</h1>
+        <p class="subtitle">Subtítulo o llamada a la acción breve</p>
+    </div>
 
     <!-- Fallback para usuarios sin JS / para mejorar accesibilidad -->
     <noscript>
